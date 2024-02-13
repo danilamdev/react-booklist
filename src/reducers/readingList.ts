@@ -1,5 +1,6 @@
 import { BOOKS_STATUS } from '../const'
 import { type Book, type RLStatus } from '../types'
+import { getFromLocalStorage } from '../utils/getFromLocalStorage'
 
 export interface ReadingListItem {
   isbn: Book['ISBN']
@@ -15,7 +16,7 @@ type RLActions =
   | { type: 'STORAGE_UPDATE', payload: { state: ReadingListItem[] } }
   | { type: 'CLEAR_RL' }
 
-export const initialState: ReadingListItem[] = JSON.parse(window.localStorage.getItem('state')) || []
+export const initialState: ReadingListItem[] = getFromLocalStorage('state')
 
 export function readingListReducer (state: State, action: RLActions): State {
   if (action.type === 'ADD_TO_RL') {
